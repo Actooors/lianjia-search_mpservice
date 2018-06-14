@@ -3,7 +3,7 @@ package routers
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"lianjia-search_service/controllers"
+	"lianjia-search_mpservice/controllers"
 )
 
 var Router *gin.Engine

@@ -2,7 +2,7 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
-	"lianjia-search_service/dao"
+	"lianjia-search_mpservice/dao"
 )
 
 var table *gorm.DB
