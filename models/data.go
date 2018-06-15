@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/jinzhu/gorm"
 	"lianjia-search_mpservice/dao"
+	"time"
 )
 
 var table *gorm.DB
@@ -14,7 +15,7 @@ const (
 
 type data struct {
 	gorm.Model
-	City          string `gorm:"column:city'"`
+	City          string
 	Area          string
 	SecArea       string
 	Title         string
@@ -25,8 +26,13 @@ type data struct {
 	Decoration    string
 	Lift          string
 	Flood         string
-	TotalPrice    string
-	UnitPrice     string
+	TotalPrice    int
+	UnitPrice     int
+	Image         string
+	Link          string
+	Star          int
+	Visit         int
+	PublishTime   time.Time
 }
 
 func init() {
