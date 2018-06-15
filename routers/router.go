@@ -2,8 +2,8 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"lianjia-search_mpservice/controllers"
+	"github.com/gin-contrib/cors"
 )
 
 var Router *gin.Engine
@@ -11,9 +11,7 @@ var Router *gin.Engine
 
 func init() {
 	Router = gin.Default()
-	Router.GET("/", func(context *gin.Context) {
-		context.String(http.StatusOK,"asd")
-	})
+	Router.Use(cors.Default())//CORS, allows all origins
 	apiGroup := Router.Group("/api")
 	{
 		apiGroup.POST("/search", controllers.SearchController)
