@@ -2,7 +2,7 @@ package models
 
 import (
 	"github.com/jinzhu/gorm"
-	"lianjia-search_mpservice/dao"
+	"github.com/Actooors/lianjia-search_mpservice/dao"
 	"strings"
 )
 

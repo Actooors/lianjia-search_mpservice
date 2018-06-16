@@ -2,7 +2,7 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"lianjia-search_mpservice/controllers"
+	"github.com/Actooors/lianjia-search_mpservice/controllers"
 	"github.com/gin-contrib/cors"
 )
 

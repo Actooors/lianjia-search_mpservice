@@ -1,7 +1,7 @@
 package main
 
 import (
-	"lianjia-search_mpservice/routers"
+	"github.com/Actooors/lianjia-search_mpservice/routers"
 )
 
 func main() {

@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
-	"lianjia-search_mpservice/tools"
+	"github.com/Actooors/lianjia-search_mpservice/tools"
 	"github.com/tidwall/gjson"
-	"lianjia-search_mpservice/models"
+	"github.com/Actooors/lianjia-search_mpservice/models"
 )
 
 func SearchController(c *gin.Context) {
