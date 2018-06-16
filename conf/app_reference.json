@@ -1,0 +1,9 @@
+{
+  "dataSource": {
+    "host": "api.mzz.pub",
+    "port": 3306,
+    "database": "city_lianjia_data",
+    "username": "root",
+    "password": ""
+  }
+}
