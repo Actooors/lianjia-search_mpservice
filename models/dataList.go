@@ -48,12 +48,12 @@ func init() {
 		searchQuery += col + ","
 	}
 	searchQuery = searchQuery[:len(searchQuery)-1]
-	searchQuery += "));"
+	searchQuery += ")) limit ?,?;"
 }
 
-func GetDataList(keyword string) (datas []*DataList, err error) {
+func GetDataList(keyword string, pageSize int64, page int64) (datas []*DataList, err error) {
 	//执行原生sql语句
-	rows, err := tableDataList.Raw(searchQuery, keyword).Rows()
+	rows, err := tableDataList.Raw(searchQuery, keyword, (page-1)*pageSize, pageSize).Rows()
 	if err != nil {
 		return
 	}

@@ -13,13 +13,17 @@ func SearchController(c *gin.Context) {
 		tools.Response(c, "ERROR", err.Error(), nil)
 		return
 	}
-	result := gjson.GetBytes(data, "keyword")
-	if !result.Exists() {
-		tools.Response(c, "ERROR", "参数不正确", nil)
-		return
+	results := gjson.GetManyBytes(data, "keyword", "pageSize", "page")
+	for _, result := range results {
+		if !result.Exists() {
+			tools.Response(c, "ERROR", "参数不正确", nil)
+			return
+		}
 	}
-	keyword := result.String()
-	datas, err := models.GetDataList(keyword)
+	keyword := results[0].String()
+	page := results[1].Int()
+	pageSize := results[2].Int()
+	datas, err := models.GetDataList(keyword, page, pageSize)
 	if err != nil {
 		tools.Response(c, "ERROR", err.Error(), nil)
 		return
@@ -28,12 +32,12 @@ func SearchController(c *gin.Context) {
 }
 
 func DetailController(c *gin.Context) {
-	keyword, ok := c.GetQuery("pageId")
+	pageId, ok := c.GetQuery("pageId")
 	if !ok {
 		tools.Response(c, "ERROR", "参数不正确", nil)
 		return
 	}
-	data, err := models.GetDataDetail(keyword)
+	data, err := models.GetDataDetail(pageId)
 	if err != nil {
 		tools.Response(c, "ERROR", err.Error(), nil)
 		return
