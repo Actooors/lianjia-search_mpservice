@@ -6,15 +6,16 @@ import (
 	"time"
 )
 
-var table *gorm.DB
+var tableDataList *gorm.DB
 var searchQuery string
 
 const (
-	querySearchRaw = "SELECT * FROM city_lianjia_data_lianjia WHERE LOCATE(?,CONCAT("
+	querySearchRaw = "SELECT * FROM data_detail WHERE LOCATE(?,CONCAT("
 )
 
-type data struct {
+type DataList struct {
 	gorm.Model
+	PageId        string
 	City          string
 	Area          string
 	SecArea       string
@@ -29,7 +30,6 @@ type data struct {
 	TotalPrice    int
 	UnitPrice     int
 	Image         string
-	Link          string
 	Star          int
 	Visit         int
 	PublishTime   time.Time
@@ -38,7 +38,7 @@ type data struct {
 func init() {
 	//限制table在city_lianji_data_lianjia之内
 	db := dao.DB()
-	table = db.Table("city_lianjia_data_lianjia")
+	tableDataList = db.Table("data_list")
 
 	//拼接searchQuery
 	var cols = []string{"city", "area", "sec_area", "title", "community_name", "house_type",
@@ -51,17 +51,17 @@ func init() {
 	searchQuery += "));"
 }
 
-func GetData(keyword string) (datas []*data, err error) {
+func GetDataList(keyword string) (datas []*DataList, err error) {
 	//执行原生sql语句
-	rows, err := table.Raw(searchQuery, keyword).Rows()
+	rows, err := tableDataList.Raw(searchQuery, keyword).Rows()
 	if err != nil {
 		return
 	}
-	datas = make([]*data, 0)
+	datas = make([]*DataList, 0)
 	defer rows.Close()
 	for rows.Next() {
-		var data data
-		table.ScanRows(rows, &data)
+		var data DataList
+		tableDataList.ScanRows(rows, &data)
 		datas = append(datas, &data)
 	}
 	return

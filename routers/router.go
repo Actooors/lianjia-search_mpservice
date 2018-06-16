@@ -15,5 +15,6 @@ func init() {
 	apiGroup := Router.Group("/api")
 	{
 		apiGroup.POST("/search", controllers.SearchController)
+		apiGroup.GET("/detail", controllers.DetailController)
 	}
 }

@@ -10,19 +10,33 @@ import (
 func SearchController(c *gin.Context) {
 	data, err := c.GetRawData()
 	if err != nil {
-		tools.Response(c, "FAILED", err.Error(), nil)
+		tools.Response(c, "ERROR", err.Error(), nil)
 		return
 	}
 	result := gjson.GetBytes(data, "keyword")
 	if !result.Exists() {
-		tools.Response(c, "FAILED", "参数不正确", nil)
+		tools.Response(c, "ERROR", "参数不正确", nil)
 		return
 	}
 	keyword := result.String()
-	datas, err := models.GetData(keyword)
+	datas, err := models.GetDataList(keyword)
 	if err != nil {
-		tools.Response(c, "FAILED", err.Error(), nil)
+		tools.Response(c, "ERROR", err.Error(), nil)
 		return
 	}
 	tools.Response(c, "SUCCESS", nil, datas)
+}
+
+func DetailController(c *gin.Context) {
+	keyword, ok := c.GetQuery("pageId")
+	if !ok {
+		tools.Response(c, "ERROR", "参数不正确", nil)
+		return
+	}
+	data, err := models.GetDataDetail(keyword)
+	if err != nil {
+		tools.Response(c, "ERROR", err.Error(), nil)
+		return
+	}
+	tools.Response(c, "SUCCESS", nil, data)
 }
