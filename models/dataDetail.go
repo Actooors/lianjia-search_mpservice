@@ -58,7 +58,7 @@ func GetDataDetail(pageId string) (data interface{}, err error) {
 		}
 		return data, err
 	}
-	images := strings.Split(detail.CarouselImages, "|")
+	images := strings.Split(detail.CarouselImages, ",")
 	data = ret{
 		detail,
 		images,
