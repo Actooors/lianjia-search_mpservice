@@ -33,6 +33,7 @@ type DataList struct {
 	Star          int
 	Visit         int
 	PublishTime   time.Time
+	Coordinate
 }
 
 func init() {
